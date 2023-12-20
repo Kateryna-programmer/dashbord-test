@@ -296,16 +296,45 @@ const users = [
     status: 'Inactive',
   },
 ];
-
 const tableBody = $('.table__body');
 const usersPerPage = 8;
 let currentPage = 1;
 let totalPages = Math.ceil(users.length / usersPerPage);
+
 const paginationItems = $('.pagination__list-item');
 const prev = $('.pagination__list-item_prev');
 const next = $('.pagination__list-item_next');
 
-function updatePagination() {
+function createMobileTableRow(user) {
+  const userData = `
+    <td>
+      <p class="td-mob-title">Customer:<span> ${user.name}</span></p>
+      <p class="td-mob-title">Company:<span> ${user.company}</span></p>
+      <p class="td-mob-title">Phone Number:<span> ${user.phoneNumber}</span></p>
+      <p class="td-mob-title">Email: <span> ${user.email}</span></p>
+      <p class="td-mob-title">Country: <span> ${user.country}</span></p>
+      <p class="td-mob-title">Status:<span> ${user.status}</span></p>
+    </td>
+  `;
+  return $('<tr>').append(userData);
+}
+
+function createDesktopTableRow(user) {
+  return $('<tr>').append(
+    $('<td>').text(user.name),
+    $('<td>').text(user.company),
+    $('<td>').text(user.phoneNumber),
+    $('<td>').text(user.email),
+    $('<td>').text(user.country),
+    $('<td>').append(
+      $('<span>')
+        .text(user.status)
+        .addClass(`status status-${user.status.toLowerCase()}`)
+    )
+  );
+}
+
+function updateTable() {
   paginationItems.removeClass('pagination__list-item_active');
   $(`.pagination__list-item[data-page="${currentPage}"]`).addClass(
     'pagination__list-item_active'
@@ -316,49 +345,58 @@ function updatePagination() {
 
   tableBody.empty();
   displayedUsers.forEach((user) => {
-    const newRow = $('<tr>').append(
-      $('<td>').text(user.name),
-      $('<td>').text(user.company),
-      $('<td>').text(user.phoneNumber),
-      $('<td>').text(user.email),
-      $('<td>').text(user.country),
-      $('<td>').append(
-        $('<span>')
-          .text(user.status)
-          .addClass(`status status-${user.status.toLowerCase()}`)
-      )
-    );
-    tableBody.append(newRow);
+    if (window.innerWidth <= 900) {
+      tableBody.append(createMobileTableRow(user));
+    } else {
+      tableBody.append(createDesktopTableRow(user));
+    }
   });
 
   prev.prop('disabled', currentPage === 1);
   next.prop('disabled', currentPage === totalPages);
 }
 
-updatePagination();
-
-$('.pagination__list').on('click', '.pagination__list-item', function () {
+function handlePaginationClick() {
   const clickedPage = parseInt($(this).attr('data-page'));
   if (!isNaN(clickedPage)) {
     currentPage = clickedPage;
-    updatePagination();
+    updateTable();
   }
-});
+}
 
+function handleNextPrevClick() {
+  if (
+    $(this).hasClass('pagination__list-item_next') &&
+    currentPage < totalPages
+  ) {
+    currentPage++;
+  } else if (
+    $(this).hasClass('pagination__list-item_prev') &&
+    currentPage > 1
+  ) {
+    currentPage--;
+  }
+  updateTable();
+}
+
+function handleResize() {
+  updateTable();
+}
+
+updateTable();
+
+$('.pagination__list').on(
+  'click',
+  '.pagination__list-item',
+  handlePaginationClick
+);
 $('.pagination__list-item_next, .pagination__list-item_prev').on(
   'click',
-  function () {
-    if (
-      $(this).hasClass('pagination__list-item_next') &&
-      currentPage < totalPages
-    ) {
-      currentPage++;
-    } else if (
-      $(this).hasClass('pagination__list-item_prev') &&
-      currentPage > 1
-    ) {
-      currentPage--;
-    }
-    updatePagination();
-  }
+  handleNextPrevClick
 );
+
+$('.burger').on('click', function () {
+  $('.sidebar').fadeToggle('slow');
+});
+
+$(window).on('resize', handleResize);
