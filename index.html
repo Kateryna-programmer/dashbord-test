@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Test Task</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="section-wrapper">
+      <div class="sidebar">
+
+        <div class="sidebar__logo">
+          <img class="sidebar__logo-img" src="image/logo.svg" alt="dashboard">
+          <span class="sidebar__logo-title">Dashboard</span>
+        </div>
+
+        <div class="sidebar__menu">
+          <ul class="sidebar__menu-list">
+            <li class="sidebar__menu-list-item"><img src="image/icon-1.png" alt="dashboard"><a href="">Dashboard</a>
+            </li>
+            <li class="sidebar__menu-list-item"><img src="image/icon-2.png" alt="product"><a href="">Product</a></li>
+            <li class="sidebar__menu-list-item sidebar__menu-list-item_active"><img src="image/icon-3.png"
+                alt="customers"><a href="">Customers</a>
+            </li>
+            <li class="sidebar__menu-list-item"><img src="image/icon-4.png" alt="income"><a href="">Income</a></li>
+            <li class="sidebar__menu-list-item"><img src="image/icon-5.png" alt="promote"><a href="">Promote</a></li>
+            <li class="sidebar__menu-list-item"><img src="image/icon-6.png" alt="help"><a href="">Help</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar__admin">
+          <div class="sidebar__admin-image">
+            <img src="image/avatar.png" alt="avatar">
+          </div>
+          <div class="sidebar__admin-info">
+            <p class="sidebar__admin-info-name">Evano</p>
+            <p class="sidebar__admin-info-position">Project Manager</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="main">
+
+        <h2 class="main__title">Hello Evano <img class="main__title-img" src="image/hello-hand.png" alt="hello">,</h2>
+
+        <div class="main__customers">
+
+          <div class="main__customers-top">
+            <div class="main__customers-titles">
+              <h2 class="main__customers-title">All Customers</h2>
+              <h3 class="main__customers-subtitle">Active Members</h3>
+            </div>
+            <div class="main__customers-search">
+              <input class="main__customers-search-input" type="text" name="search" id="search" placeholder="Search">
+            </div>
+          </div>
+
+          <table class="table">
+            <thead class="table__head">
+              <tr>
+                <th class="table-title table-title_1">Customer Name</th>
+                <th class="table-title table-title_2">Company</th>
+                <th class="table-title table-title_3">Phone Number</th>
+                <th class="table-title table-title_4">Email</th>
+                <th class="table-title table-title_5">Country</th>
+                <th class="table-title table-title_6">Status</th>
+              </tr>
+            </thead>
+            <tbody class="table__body"></tbody>
+          </table>
+
+          <div class="main__customers-bottom">
+
+            <div class="main__customers-total">
+              <p>Showing data 1 to 8 of 256K entries</p>
+            </div>
+
+            <div class="pagination">
+              <ul class="pagination__list">
+                <li class="pagination__list-item pagination__list-item_prev"><img src="image/arrow-left.png" alt="left">
+                </li>
+                <li class="pagination__list-item pagination__list-item_active" data-page="1">1</li>
+                <li class="pagination__list-item" data-page="2">2</li>
+                <li class="pagination__list-item" data-page="3">3</li>
+                <li class="pagination__list-item" data-page="4">4</li>
+                <li class="pagination__list-item">...</li>
+                <li class="pagination__list-item" data-page="40">40</li>
+                <li class="pagination__list-item pagination__list-item_next"><img src="image/arrow-right.png"
+                    alt="right"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
